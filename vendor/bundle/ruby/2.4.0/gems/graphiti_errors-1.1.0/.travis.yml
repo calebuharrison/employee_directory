@@ -1,0 +1,36 @@
+language: ruby
+rvm:
+- 2.4
+- 2.5
+- 2.6
+
+gemfile:
+  - gemfiles/rails_4.gemfile
+  - gemfiles/rails_5.gemfile
+
+before_install:
+- gem install bundler -v '1.17.3'
+
+install: bundle _1.17.3_ install --retry=3 --jobs=3
+
+env:
+  - COMMAND=standardrb --no-fix --format progress
+  - COMMAND=rspec
+
+matrix:
+  exclude:
+    - gemfile: gemfiles/rails_4.gemfile
+      rvm: 2.5
+    - gemfile: gemfiles/rails_4.gemfile
+      rvm: 2.6
+
+script:
+  - bundle _1.17.3_ exec $COMMAND
+
+deploy:
+  provider: rubygems
+  api_key: $RUBYGEMS_API_KEY
+  gem: graphiti_errors
+  on:
+    tags: true
+    repo: graphiti-api/graphiti_errors
