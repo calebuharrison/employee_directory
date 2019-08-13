@@ -1,0 +1,1 @@
+"builds": [{ "src": "app/config.ru", "use": "@now/ruby" }]
