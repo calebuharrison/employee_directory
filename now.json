@@ -1,1 +1,3 @@
-"builds": [{ "src": "app/config.ru", "use": "@now/ruby" }]
+{
+  "builds": [{ "src": "app/config.ru", "use": "@now/ruby" }]
+}
